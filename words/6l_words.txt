@@ -2982,6 +2982,7 @@ heliac
 helios
 helium
 helots
+helper
 hemins
 hemoid
 henbit
