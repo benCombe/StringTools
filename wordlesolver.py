@@ -12,7 +12,7 @@ parser.add_argument('--version', action='store_true', help="version")
 
 
 def load_words(length):
-        word_file = f"words/{length}l_words.txt"
+        word_file = f"C:/Program Files/CustomPrograms/words/{length}l_words.txt"
         with open(word_file, 'r') as file:
             words = [line.strip() for line in file if len(line.strip()) == length]
         return words

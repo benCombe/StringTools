@@ -1,3 +1,4 @@
+import sys
 import argparse
 
 
@@ -14,7 +15,7 @@ class WordFinder:
         self.omit_pattern = [set() for _ in range(self.length)]  # Tracks bad placements
         
     def load_words(self, length):
-        word_file = f"words/{length}l_words.txt"
+        word_file = f"C:/Program Files/CustomPrograms/words/{length}l_words.txt"
         with open(word_file, 'r') as file:
             words = [line.strip() for line in file if len(line.strip()) == length]
         return words
@@ -68,12 +69,12 @@ class WordFinder:
 # Example usage
 if __name__ == "__main__":
 
-    length = 5          # Default length
+    length = 4          # Default length
     include = ""        # Default include
     exclude = ""        # Default exclude
     pattern = "#"*length  # Default pattern
 
-    parser = argparse.ArgumentParser(description="Process command-line arguments.")
+    parser = argparse.ArgumentParser(description="Tool for finding words based on specific alphabets and patterns")
 
     parser.add_argument('-l', type=str, help="word length", required=False)
     parser.add_argument('-p', type=str, help="pattern", required=False)
@@ -84,8 +85,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.version:
-        print("WordFinder v1.0")
-        exit(0)
+        print("WordFinder v1.2.0")
+        sys.exit(0)
+        
 
     if args.l:
         length = int(args.l)
@@ -110,3 +112,5 @@ if __name__ == "__main__":
         if i % 3 == 0 and i != 0:
             print()
         print(word, end="\t")
+
+    exit(0)

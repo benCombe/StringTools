@@ -67,4 +67,3 @@ if __name__ == "__main__":
                 print(f"{i+1}. {word}\t{sum(getValue(c) for c in word)}")
 
 
-#modify unscrabler.py for non-main usage
