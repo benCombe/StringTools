@@ -1,6 +1,12 @@
 import sys
 import argparse
 
+_APP_NAME = "WordFinder"
+_VERSION = "1.2.2"
+
+#_CURRENT_DIRECTORY = sys.path[0] + "/"
+_CURRENT_DIRECTORY = "C:/Program Files/CustomPrograms/"
+_WORDLIST_DIRECTORY = _CURRENT_DIRECTORY + "words/"
 
 class WordFinder:
     def __init__(self, length=5, wordlist=None):
@@ -15,10 +21,16 @@ class WordFinder:
         self.omit_pattern = [set() for _ in range(self.length)]  # Tracks bad placements
         
     def load_words(self, length):
-        word_file = f"C:/Program Files/CustomPrograms/words/{length}l_words.txt"
+        word_file = f"{_WORDLIST_DIRECTORY}{length}l_words.txt"
         with open(word_file, 'r') as file:
             words = [line.strip() for line in file if len(line.strip()) == length]
         return words
+    
+    def write_to_wordlist(self, new_word):
+        word_file = f"{_WORDLIST_DIRECTORY}{len(new_word)}l_words.txt"
+        with open(word_file, 'a') as file:
+            for word in new_word:
+                file.write(f"{word}\n")
 
     def set_length(self, length):
         self.length = length
@@ -69,6 +81,8 @@ class WordFinder:
 # Example usage
 if __name__ == "__main__":
 
+    
+
     length = 4          # Default length
     include = ""        # Default include
     exclude = ""        # Default exclude
@@ -80,14 +94,20 @@ if __name__ == "__main__":
     parser.add_argument('-p', type=str, help="pattern", required=False)
     parser.add_argument('-inc', type=str, help="includes", required=False)
     parser.add_argument('-exc', type=str, help="exclude", required=False)
+    parser.add_argument('--add', type=str, help="add word to wordlist", required=False)
     parser.add_argument('--version', action='store_true', help="version")
 
 
     args = parser.parse_args()
     if args.version:
-        print("WordFinder v1.2.0")
+        print(f"{_APP_NAME} v{_VERSION}")
         sys.exit(0)
-        
+
+    if args.add:
+        wf = WordFinder()
+        wf.write_to_wordlist([args.add])
+        print(f"Added '{args.add}' to wordlist.")
+        sys.exit(0)    
 
     if args.l:
         length = int(args.l)

@@ -60,9 +60,17 @@ def main(length, start=None):
         print(f"GUESS: {guess}")
 
         while True:
-            user_eval = input(">: ")
-            if user_eval == "exit":
-                sys.exit(0)
+            while True:
+                user_eval = input(">: ")
+                if user_eval == "exit":
+                    sys.exit(0)
+
+                if user_eval.lower() == "replace":
+                    guess = random.choice(wordlist)
+                    print(f"GUESS: {guess}")
+                else:
+                    break
+                
 
             if len(user_eval) != length or not all(c in "012" for c in user_eval):
                 print(f"Must be {length} characters long and contain only 0, 1, or 2.")
@@ -99,7 +107,7 @@ def main(length, start=None):
 if __name__ == "__main__":
     args = parser.parse_args()
     if args.version:
-        print("WordleSolver v0.1")
+        print("WordleSolver v1.2")
     #elif args.help:
     #    print("WordleSolver v0.1\nFor each letter in GUESS, enter 0 if the letter is not in the word, 1 if the letter is in the word but in the wrong position, and 2 if the letter is in the correct position.\nType 'exit' to quit.")
     else:
