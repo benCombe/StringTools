@@ -133,4 +133,4 @@ if __name__ == "__main__":
             print()
         print(word, end="\t")
 
-    exit(0)
+    sys.exit(0)
